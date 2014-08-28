@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5f44208-eaf5-4e0d-accf-8907ee74b9d1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/parametros.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/image/1366x768.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/image/1600x815.vlearning.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/ObjHeadMap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/heatmap.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client.html" afterPath="$PROJECT_DIR$/client.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/heatmapFunction.js" afterPath="$PROJECT_DIR$/js/heatmapFunction.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="heatmap.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,7 +28,7 @@
       <file leaf-file-name="client.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="22" selection-start="1476" selection-end="1476" vertical-scroll-proportion="0.4950495" vertical-offset="380" max-vertical-offset="1935">
+            <state line="76" column="0" selection-start="2134" selection-end="2134" vertical-scroll-proportion="2.2574258" vertical-offset="0" max-vertical-offset="1275">
               <folding />
             </state>
           </provider>
@@ -243,7 +236,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="22" selection-start="1476" selection-end="1476" vertical-scroll-proportion="0.4950495" vertical-offset="380" max-vertical-offset="1935">
+        <state line="76" column="0" selection-start="2134" selection-end="2134" vertical-scroll-proportion="2.2574258" vertical-offset="0" max-vertical-offset="1275">
           <folding />
         </state>
       </provider>

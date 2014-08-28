@@ -32,28 +32,20 @@
     var dataXY = new Array();
     var idBrowser = cuniq();
 
-    console.log('cokkie',document.cookie);
     //get x,y
     function getPos(e) {
-        x = e.clientX;
-        y = e.clientY;
-        cursor = "Your Mouse Position Is : " + x + " and " + y;
-        document.getElementById("displayArea").innerHTML=cursor
-        // save in array
+        var x = e.clientX;
+        var y = e.clientY;
         var arrayScreem = getViewport();
         var arreglo = {
             'id' : idBrowser,
             'x' : x,
             'y' : y,
             'viewPort' : arrayScreem[0] + 'x' + arrayScreem[1],
-            //'window' : ''
             'date' : _settingDateTime(new Date())
         };
 
         dataXY.push(arreglo);
-
-        //console.log('arreglo', arreglo);
-        //console.log('dataXY', dataXY);
     }
 
      /**
@@ -82,42 +74,6 @@
     // Init App
     //setInterval("sendDataToServer()",5000);
     sendDataToServer();
-
-
-
-
-
-
-
-
-
-
-
-
-
-    var eje = new Array();
-
-    var arreglo1 = {
-        'id' :111,
-        'x' : 10,
-        'y' : 20,
-        'viewPort' : '1500x700',
-        'date' : '2014-01-01 11:11:11'
-    };
-    var arreglo2 = {
-        'id' :111,
-        'x' : 10,
-        'y' : 20,
-        'viewPort' : '1500x700',
-        'date' : '2014-01-01 11:11:11'
-    };
-
-    eje.push(arreglo1);
-    eje.push(arreglo2);
-
-
-console.log('eje', eje);
-
 
     </script>
 </body>
