@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Mouse Move Heatmap Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="This example also demonstrates how to dynamically add data to a heatmap instance with the 'addData' function at runtime" />
+  <meta name="keywords" content="click heatmap, click heat, click map, mouse click map" />
+
+  <style>
+body, html, h2 { margin:0; padding:0; height:100%;}
+.demo-wrapper { width:100%; height:100%; position:absolute; background:rgba(0,0,0,.1); background-image:"image/1600x815.vlearning.png"}
+/*.demo-wrapper { position:relative; background:rgba(0,0,0,.9); }*/
+//.text-bg { color:rgba(255,255,255,.8);  position:absolute; left:0; top:0; right:0; bottom:0; height:40px; width:230px; text-align:center; margin:auto; }
+
+#heatmap {
+width: 100%;
+height: 100%;
+}    
+ 
+  </style>
+</head>
+<body onmousemove="getPos(event)">
+  <div class="wrapper">
+    <div class="demo-wrapper">
+      <div id="heatmap">        
+      </div>
+    </div>
+      <span id="displayArea"></span>
+  </div>
+  <!--<script src="js/heatmap.min.js"></script>  -->
+  <script src="js/heatmapFunction.js"></script> 
+  <script>       
+      var hoyes= new Date();
+        console.log('hoyes',hoyes);
+        var dateString = _settingDateTime(hoyes);
+        console.log('dateString',dateString);
+        
+        console.log('x-y', getViewport());
+        
+        
+    // background
+    document.body.style.backgroundImage="url('image/1600x815.vlearning.png')";
+    var dataXY = new Array();
+    //get x,y
+    function getPos(e){
+        x=e.clientX;
+        y=e.clientY;
+        cursor="Your Mouse Position Is : " + x + " and " + y ;
+        document.getElementById("displayArea").innerHTML=cursor
+        // save in array
+        
+        var arreglo = {
+            'x' : x,
+            'y' : y,
+            'screem' : '',
+            'date' : _settingDateTime(new Date())
+        };
+        
+        dataXY.push(arreglo);
+        
+        console.log('arreglo', arreglo);
+        console.log('dataXY', dataXY);
+        
+        
+    }
+    
+    
+    function sendData() {
+        setTimeout(function() {
+         console.log("time", "TIMER = " + status);
+         //Slot.loadDataSecuencial();
+     }, 2000);
+    }
+
+  </script>
+
+</body>
+</html>
