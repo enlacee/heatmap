@@ -24,12 +24,6 @@ height: 100%;
 </head>
 <body>
   <div class="wrapper">
-    <h1>Mouse Movement Heatmap 1600x815</h1>
-
-    This example also demonstrates how to dynamically add data to a heatmap instance with the 'addData' function at runtime. If you hover over the gray area or click on it datapoints will be added. <br />
-    <button class="thankyou btn">thank you, this example was useful</button>
-      <br style="clear:both" />
-    <h2>Demo</h2>
     <div class="demo-wrapper">
       <div id="heatmap">
         
@@ -77,13 +71,33 @@ height: 100%;
       };*/
     </script>  
   <script>
+    function updateLegend(data) {
+        console.log(data);
+        document.body.style.backgroundImage="url('image/1600x815.vlearning.png')";
+        /*$('body').src = 'image/1600x815.vlearning.png';*/
+    };
+    
     window.onload = function() {
       var heatmapContainer = document.getElementById('heatmap')
       
       var heatmapInstance = h337.create({
         container: heatmapContainer,
-        radius: 50
+        radius: 50,
+          // update the legend whenever there's an extrema change
+          onExtremaChange: function onExtremaChange(data) {
+            updateLegend(data);
+          }        
       });
+      
+      /*
+  //creamos la nueva imagen 
+  var img = new Image(500,500);
+  //le decimos la ruta de la imagen, en este caso html5.jpg
+ img.src = "image/1600x815.vlearning.png";
+ //pasamos la imagen al 2d del canvas y se dibujará
+ //en 0 0 podemos poner las cordenadas de donde empezar a dibujar la imagen
+heatmapContainer.drawImage(img, 0, 0);
+*/
 
       heatmapContainer.onmousemove = heatmapContainer.ontouchmove = function(e) {// alert("ss");
           // we need preventDefault for the touchmove
