@@ -48,3 +48,16 @@ function _settingDateTime(d) {
         curr_hour + ':' + curr_min + ':' + curr_seg;
     return string;
 }
+
+/**
+ *
+ * @type {number}
+ */
+var c = 1;
+function cuniq() {
+    var d = new Date(),
+        m = d.getMilliseconds() + "",
+        u = ++d + m + (++c === 10000 ? (c = 1) : c);
+
+    return u;
+}
