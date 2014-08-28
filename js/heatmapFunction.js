@@ -61,23 +61,3 @@ function cuniq() {
     return u;
 }
 
-/**
- * todoo a string para pasar POR GET
- * @param arraySlot
- * @returns {string}
- */
-function arrayToStringDataXY(arraySlot)
-{
-    var string = '';
-    var contador = 1;
-    for(var i=0; i < arraySlot.length;i++) {
-        if (arraySlot.length == i) {
-            string += arraySlot[i][contador];
-        } else {
-            string += arraySlot[i][contador]+',';
-        }
-        contador++;
-    }
-    return string;
-
-}

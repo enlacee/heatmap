@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b5f44208-eaf5-4e0d-accf-8907ee74b9d1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client.html" afterPath="$PROJECT_DIR$/client.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/heatmapFunction.js" afterPath="$PROJECT_DIR$/js/heatmapFunction.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/parametros.php" afterPath="$PROJECT_DIR$/parametros.php" />
     </list>
     <ignored path="heatmap.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,7 +30,7 @@
       <file leaf-file-name="client.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="0" selection-start="2134" selection-end="2134" vertical-scroll-proportion="2.2574258" vertical-offset="0" max-vertical-offset="1275">
+            <state line="34" column="13" selection-start="1186" selection-end="1186" vertical-scroll-proportion="-0.24752475" vertical-offset="635" max-vertical-offset="1275">
               <folding />
             </state>
           </provider>
@@ -37,17 +39,11 @@
       <file leaf-file-name="parametros.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/parametros.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="18" selection-start="38" selection-end="38" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="120">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="heatmapFunction.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/heatmapFunction.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="28" selection-start="1805" selection-end="1824" vertical-scroll-proportion="0.0" vertical-offset="316" max-vertical-offset="1335">
-              <folding />
+            <state line="25" column="24" selection-start="956" selection-end="956" vertical-scroll-proportion="-15.625" vertical-offset="0" max-vertical-offset="975">
+              <folding>
+                <marker date="1409263915444" expanded="true" signature="512:736" placeholder="INSERT INTO ..." />
+                <marker date="1409263915444" expanded="true" signature="512:588" placeholder="INSERT INTO ..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -66,8 +62,8 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/js/heatmapFunction.js" />
-        <option value="$PROJECT_DIR$/parametros.php" />
         <option value="$PROJECT_DIR$/client.html" />
+        <option value="$PROJECT_DIR$/parametros.php" />
       </list>
     </option>
   </component>
@@ -222,21 +218,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/heatmapFunction.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="28" selection-start="1805" selection-end="1824" vertical-scroll-proportion="0.0" vertical-offset="316" max-vertical-offset="1335">
+        <state line="58" column="51" selection-start="1669" selection-end="1669" vertical-scroll-proportion="0.71001756" vertical-offset="466" max-vertical-offset="1035">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/mysqli.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2076" column="9" selection-start="66584" selection-end="66584" vertical-scroll-proportion="0.34774438" vertical-offset="30910" max-vertical-offset="48435">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/parametros.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="18" selection-start="38" selection-end="38" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="120">
-          <folding />
+        <state line="25" column="24" selection-start="956" selection-end="956" vertical-scroll-proportion="-15.625" vertical-offset="0" max-vertical-offset="975">
+          <folding>
+            <marker date="1409263915444" expanded="true" signature="512:736" placeholder="INSERT INTO ..." />
+            <marker date="1409263915444" expanded="true" signature="512:588" placeholder="INSERT INTO ..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="0" selection-start="2134" selection-end="2134" vertical-scroll-proportion="2.2574258" vertical-offset="0" max-vertical-offset="1275">
+        <state line="34" column="13" selection-start="1186" selection-end="1186" vertical-scroll-proportion="-0.24752475" vertical-offset="635" max-vertical-offset="1275">
           <folding />
         </state>
       </provider>

@@ -52,17 +52,17 @@
       * send data to server
       */
     function sendDataToServer() {
+         //console.log(dataXY.length);
+             setTimeout(function() {
+                 console.log("setTimeout");
+                 sendDataToServer();
+                 dataXY = new Array();
 
-         setTimeout(function() {
-             console.log("setTimeout");
-             sendDataToServer();
-             dataXY = new Array();
-
-         }, 3000);
+             }, 2000);
 
          $.ajax({
              url: 'parametros.php',
-             data : {op : 'insertar', data : dataXY},
+             data : {op : 'insertar', data : dataXY, idPage : 1},
              type: 'POST',
              dataType: 'json',
              success: function (rs){
