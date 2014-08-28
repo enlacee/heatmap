@@ -23,6 +23,7 @@
         <span id="displayArea"></span>
     </div>
 
+    <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/heatmapFunction.js"></script>
 
     <script>
@@ -51,35 +52,72 @@
 
         dataXY.push(arreglo);
 
-        console.log('arreglo', arreglo);
-        console.log('dataXY', dataXY);
+        //console.log('arreglo', arreglo);
+        //console.log('dataXY', dataXY);
     }
 
      /**
       * send data to server
       */
     function sendDataToServer() {
-        console.log("sendDataToServer");
 
-         var data = arrayToString(dataXY);
-         console.log('data',data);
-         /*
-         //var parametro = arrayToString(arraySlot);
+         setTimeout(function() {
+             console.log("setTimeout");
+             sendDataToServer();
+             dataXY = new Array();
+
+         }, 3000);
+
          $.ajax({
              url: 'parametros.php',
-             data : {op : 'insertar', data : data},
-             //type: 'GET',
+             data : {op : 'insertar', data : dataXY},
+             type: 'POST',
              dataType: 'json',
              success: function (rs){
-                // clear array
-                dataXY = [];
              }
-         });*/
+         });
     }
 
 
     // Init App
-    setInterval("sendDataToServer()",2000);
+    //setInterval("sendDataToServer()",5000);
+    sendDataToServer();
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var eje = new Array();
+
+    var arreglo1 = {
+        'id' :111,
+        'x' : 10,
+        'y' : 20,
+        'viewPort' : '1500x700',
+        'date' : '2014-01-01 11:11:11'
+    };
+    var arreglo2 = {
+        'id' :111,
+        'x' : 10,
+        'y' : 20,
+        'viewPort' : '1500x700',
+        'date' : '2014-01-01 11:11:11'
+    };
+
+    eje.push(arreglo1);
+    eje.push(arreglo2);
+
+
+console.log('eje', eje);
+
 
     </script>
 </body>

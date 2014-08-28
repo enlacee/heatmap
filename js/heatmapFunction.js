@@ -66,7 +66,7 @@ function cuniq() {
  * @param arraySlot
  * @returns {string}
  */
-function arrayToString(arraySlot)
+function arrayToStringDataXY(arraySlot)
 {
     var string = '';
     var contador = 1;
