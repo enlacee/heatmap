@@ -53,11 +53,31 @@ function _settingDateTime(d) {
  *
  * @type {number}
  */
-var c = 1;
 function cuniq() {
     var d = new Date(),
-        m = d.getMilliseconds() + "",
-        u = ++d + m + (++c === 10000 ? (c = 1) : c);
-
+        m = d.getTime(),
+        r = parseInt(Math.floor(Math.random() * 100)),
+        u = m+''+r;
     return u;
+}
+
+/**
+ * todoo a string para pasar POR GET
+ * @param arraySlot
+ * @returns {string}
+ */
+function arrayToString(arraySlot)
+{
+    var string = '';
+    var contador = 1;
+    for(var i=0; i < arraySlot.length;i++) {
+        if (arraySlot.length == i) {
+            string += arraySlot[i][contador];
+        } else {
+            string += arraySlot[i][contador]+',';
+        }
+        contador++;
+    }
+    return string;
+
 }
