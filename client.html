@@ -10,8 +10,7 @@
 
 <style>
     body, html, h2 { margin:0; padding:0; height:100%;}
-    .demo-wrapper { width:100%; height:100%; position:absolute; background:rgba(0,0,0,.1); background-image:"image/1600x815.vlearning.png"}
-
+    .demo-wrapper { width:100%; height:100%; position:absolute; background:rgba(0,0,0,.1);}
     #heatmap {width: 100%;height: 100%;}
 </style>
 </head>
@@ -23,12 +22,16 @@
         </div>
         <span id="displayArea"></span>
     </div>
+
     <script src="js/heatmapFunction.js"></script>
+
     <script>
     // background
-    document.body.style.backgroundImage="url('image/1366x768.png')";
+    document.body.style.backgroundImage="url('image/resolution/1366x768.png')";
     var dataXY = new Array();
+    var idBrowser = cuniq();
 
+    console.log('cokkie',document.cookie);
     //get x,y
     function getPos(e) {
         x = e.clientX;
@@ -38,27 +41,46 @@
         // save in array
         var arrayScreem = getViewport();
         var arreglo = {
-        'x' : x,
-        'y' : y,
-        'viewPort' : arrayScreem[0] + 'x' + arrayScreem[1],
-        //'window' : ''
-        'date' : _settingDateTime(new Date())
+            'id' : idBrowser,
+            'x' : x,
+            'y' : y,
+            'viewPort' : arrayScreem[0] + 'x' + arrayScreem[1],
+            //'window' : ''
+            'date' : _settingDateTime(new Date())
         };
+
         dataXY.push(arreglo);
 
         console.log('arreglo', arreglo);
         console.log('dataXY', dataXY);
     }
 
+     /**
+      * send data to server
+      */
+    function sendDataToServer() {
+        console.log("sendDataToServer");
 
-    function sendData() {
-    setTimeout(function() {
-    console.log("time", "TIMER = " + status);
-    //Slot.loadDataSecuencial();
-    }, 2000);
+         var data = arrayToString(dataXY);
+         console.log('data',data);
+         /*
+         //var parametro = arrayToString(arraySlot);
+         $.ajax({
+             url: 'parametros.php',
+             data : {op : 'insertar', data : data},
+             //type: 'GET',
+             dataType: 'json',
+             success: function (rs){
+                // clear array
+                dataXY = [];
+             }
+         });*/
     }
 
-    </script>
 
+    // Init App
+    setInterval("sendDataToServer()",2000);
+
+    </script>
 </body>
 </html>
