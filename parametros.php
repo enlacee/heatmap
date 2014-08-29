@@ -6,18 +6,18 @@ $idPage = (int) empty($_POST['idPage']) ? 0 : $_POST['idPage'];
 if (is_array($dataPost) && count($dataPost) > 0) {
     $reg = formarDataToSerial($idPage, $dataPost);
 
-    print_r($reg);
+   // print_r($reg);
+
 
 
     //conection:
     $database = 'heatmap';
     $user = 'root';
-    $pass = 'beeznest';
+    $pass = '123456';
     $link = mysqli_connect("localhost", $user, $pass, $database) or die("Error " . mysqli_error($link));
-
     // insert
-    $query = "INSERT INTO heatmap (id_page, id_browser, view_port, data_serial, create_at) "
-        . "VALUES ('".$reg['id_page']."', '".$reg['id_browser']."','".$reg['view_port']."', '".$reg['data_serial']."', '".$reg['data_serial']."')";
+    $query = "INSERT INTO heatmap (id_page, id_browser, view_port, window, data_serial, create_at) "
+        . "VALUES ('".$reg['id_page']."', '".$reg['id_browser']."','".$reg['view_port']."','".$reg['window']."', '".$reg['data_serial']."', '".$reg['create_at']."')";
     $stmt = mysqli_prepare($link, $query);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt); // CLOSE $stmt
@@ -43,6 +43,7 @@ function formarDataToSerial($idPage, $data) {
             $array[$counter]['id_page'] = $idPage;
             $array[$counter]['id_browser'] = $data[$i]['id'];
             $array[$counter]['view_port'] = $data[$i]['viewPort'];
+            $array[$counter]['window'] = $data[$i]['window'];
             $array[$counter]['create_at'] = date('Y-m-d H:i:s');
         }
         $dataSerial[$i] = array(
@@ -51,6 +52,7 @@ function formarDataToSerial($idPage, $data) {
             'id_page' => $idPage,
             'id_browser' => $data[$i]['id'],
             'view_port' => $data[$i]['viewPort'],
+            'window' => $data[$i]['window'],
         );
     }
     $array[$counter]['data_serial'] = serialize($dataSerial);
