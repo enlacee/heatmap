@@ -74,7 +74,7 @@ h2 { font-size:1.2em; margin-top:20px; margin-bottom:10px; }
           points.push(point); console.log('point', point);
         }
 
-        var data = { max: max, data: points };
+        var data = { max: 96, data: points };
         return data;
       }
 
@@ -83,7 +83,7 @@ h2 { font-size:1.2em; margin-top:20px; margin-bottom:10px; }
       });
 
       // generate 200 random datapoints
-      var data = generateRandomData(100);
+      var data = generateRandomData(3); console.log('data',data);
       heatmapInstance.setData(data);
 
 

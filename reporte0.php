@@ -72,9 +72,9 @@ print_r($_GET);*/
     mysqli_close($link);
 
     $array = formatData($dataResult);    
-    $point = formarDataXY($array);
+    $array2 = formarDataXY($array);
 
-    //echo "<pre>"; print_r($point);
+    //echo "<pre>"; print_r($array2);
 ?>
 <!-- html -->
 <html lang="en">
@@ -104,30 +104,40 @@ body, html, h2 { margin:0; padding:0; height:100%;}
         document.body.style.backgroundImage="url('image/resolution/<?php echo $screen ?>.png')";        
         //var heatmapContainer = document.getElementById('heatmap')
 
-        // data
-        <?php $string = '';
-        foreach ($point as $key => $arreglo) {
-            foreach($arreglo as $indice => $value) { // print_r($arreglo);
-                $string .= "{x:".$arreglo['x'].", y:".$arreglo['y'].", value:50},"; continue;             
-            }
-        }        
-        if($string != '') {
-            $string = substr($string, 0, -1);            
+      function generateRandomData(len) {
+        // generate some random data
+        var points = [];
+        var max = 0;
+        var width = 840;
+        var height = 400;
+
+        while (len--) {
+          var val = Math.floor(Math.random()*100);
+          max = Math.max(max, val); console.log('max',max); console.log('val',val);
+          var point = {
+            x: Math.floor(Math.random()*width),
+            y: Math.floor(Math.random()*height),
+            value: 50
+          };
+          points.push(point); console.log('point', point);
         }
-        ?>
 
-        //var points = [{x:582, y:500,value: 50}, {x:10, y:10,value: 50}];
-        var points = [<?php echo $string ?>];
         var data = { max: 96, data: points };
-        console.log('data', data);
+        return data;
+      }
 
-        //render
-        var heatmapInstance = h337.create({
-            container: document.querySelector('.heatmap')
-        });
+      var heatmapInstance = h337.create({
+        container: document.querySelector('.heatmap')
+      });
 
-        //var data = generateRandomData(200);
-        heatmapInstance.setData(data);
+      // generate 200 random datapoints
+      var data = generateRandomData(3); console.log('data',data);
+      heatmapInstance.setData(data);
+
+
+      document.querySelector('.trigger-refresh').onclick = function() {
+        heatmapInstance.setData(generateRandomData(200));
+      };
 
 
 
