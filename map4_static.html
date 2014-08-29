@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Minimal Configuration Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="This example shows the minimal required configuration you need to configure a heatmap.js instance." />
+  <meta name="keywords" content="minimal config heatmap, heatmap.js, heatmap config" />
+  <style>
+html { 
+  color: #333;
+  font-family: sans-serif;
+  font-size: 16pt;
+  font-weight: 100;
+  line-height: 1.5em;
+}
+h1, h2 { text-align:center; }
+h2 { font-size:1.2em; margin-top:20px; margin-bottom:10px; }
+.hot { color:#ec1e1e; }
+.demo-wrapper { width:840px; height:400px; background:rgba(0,0,0,.03); border:3px solid black; }
+.heatmap { width:100%; height:100%; }
+.btn { background:#ec1e1e; padding:10px; border:none; color:white; cursor:pointer; margin-left:5px; }
+.trigger-refresh, .thankyou, .trigger-reconfig { float:right; }
+.trigger-refresh, .trigger-reconfig { margin-top:10px; }
+
+.breadcrumb-trail { margin-bottom:10px;}  
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h1>Minimal Configuration Example</h1>
+    <ol class="breadcrumb-trail">
+        <li><a href="//www.patrick-wied.at/static/heatmapjs/" title="heatmap.js dynamic heatmaps for the web">heatmap.js</a></li>
+        <li><a href="//www.patrick-wied.at/static/heatmapjs/examples.html" title="list of heatmap.js examples">Heatmap Examples</a></li>
+        <li>Minimal Configuration Example</li>
+    </ol>
+    This example demonstrates the minimal required configuration properties you need to configure a heatmap instance. <strong>Make sure the container you pass has a width and a height</strong> because heatmap.js will use the container's dimensions.<br />
+    <button class="thankyou btn">thank you, this example was useful</button>
+      <br style="clear:both" />
+    <h2>Demo</h2>
+    <div class="demo-wrapper">
+      <div class="heatmap">
+
+      </div>
+    </div>
+    <div class="demo-controls">
+      <button class="trigger-refresh btn">re-generate data</button>
+      <br style="clear:both" />
+    </div>
+    <h2>Code</h2>
+
+  </div>
+  <script src="js/heatmap.min.js"></script>  
+  <script>
+    window.onload = function() {
+
+      function generateRandomData(len) {
+        // generate some random data
+        var points = [];
+        var max = 0;
+        var width = 840;
+        var height = 400;
+
+        while (len--) {
+          var val = Math.floor(Math.random()*100);
+          max = Math.max(max, val); console.log('max',max); console.log('val',val);
+          var point = {
+            x: Math.floor(Math.random()*width),
+            y: Math.floor(Math.random()*height),
+            value: val
+          };
+          points.push(point); console.log('point', point);
+        }
+
+        var data = { max: max, data: points };
+        return data;
+      }
+
+      var heatmapInstance = h337.create({
+        container: document.querySelector('.heatmap')
+      });
+
+      // generate 200 random datapoints
+      var data = generateRandomData(200);
+      heatmapInstance.setData(data);
+
+
+      document.querySelector('.trigger-refresh').onclick = function() {
+        heatmapInstance.setData(generateRandomData(200));
+      };
+
+    };
+  </script>
+</body>
+</html>
