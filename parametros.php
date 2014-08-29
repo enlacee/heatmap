@@ -16,8 +16,8 @@ if (is_array($dataPost) && count($dataPost) > 0) {
     $pass = '123456';
     $link = mysqli_connect("localhost", $user, $pass, $database) or die("Error " . mysqli_error($link));
     // insert
-    $query = "INSERT INTO heatmap (id_page, id_browser, view_port, window, data_serial, create_at) "
-        . "VALUES ('".$reg['id_page']."', '".$reg['id_browser']."','".$reg['view_port']."','".$reg['window']."', '".$reg['data_serial']."', '".$reg['create_at']."')";
+    $query = "INSERT INTO heatmap (id_page, id_browser, view_port, window_browser, screen, data_serial, create_at) "
+        . "VALUES ('".$reg['id_page']."', '".$reg['id_browser']."','".$reg['view_port']."','".$reg['window_browser']."','".$reg['screen']."', '".$reg['data_serial']."', '".$reg['create_at']."')";
     $stmt = mysqli_prepare($link, $query);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt); // CLOSE $stmt
@@ -43,7 +43,8 @@ function formarDataToSerial($idPage, $data) {
             $array[$counter]['id_page'] = $idPage;
             $array[$counter]['id_browser'] = $data[$i]['id'];
             $array[$counter]['view_port'] = $data[$i]['viewPort'];
-            $array[$counter]['window'] = $data[$i]['window'];
+            $array[$counter]['window_browser'] = $data[$i]['windowBrowser'];
+            $array[$counter]['screen'] = $data[$i]['screen'];
             $array[$counter]['create_at'] = date('Y-m-d H:i:s');
         }
         $dataSerial[$i] = array(
@@ -52,7 +53,8 @@ function formarDataToSerial($idPage, $data) {
             'id_page' => $idPage,
             'id_browser' => $data[$i]['id'],
             'view_port' => $data[$i]['viewPort'],
-            'window' => $data[$i]['window'],
+            'window_browser' => $data[$i]['windowBrowser'],
+            'screen' => $data[$i]['screen'],
         );
     }
     $array[$counter]['data_serial'] = serialize($dataSerial);
