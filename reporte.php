@@ -57,37 +57,43 @@ print_r($_GET);*/
     // insert
     $screen = $_GET['sc'];
     $id_page = $_GET['id_page'];
-
-    $query = "SELECT  data_serial FROM heatmap WHERE screen = '$screen' AND id_page = '$id_page' ";
-    $result = mysqli_query($link, $query,MYSQLI_USE_RESULT);
-    
     $dataResult = array();
-    if ($result) {
-        $c = 0;
-        while($row = $result->fetch_assoc()) {  
-            $dataResult[$c] = $row;
-            $c++;
+
+    // paginador
+    $offset = 0;
+    $limit = 250;    
+    $count = mysqli_fetch_row(mysqli_query($link, "SELECT  count(*) FROM heatmap WHERE screen = '$screen' AND id_page = '$id_page' "));
+    $total_pages = ($count[0] > 0) ? ceil($count[0]/$limit) : 1;
+
+    for ($page = 1; $page <= $total_pages; $page++) {
+        $offset = ($limit * $page) - $limit;
+        $queryLimit = "LIMIT $offset,$limit ";
+        $query = "SELECT  data_serial FROM heatmap WHERE screen = '$screen' AND id_page = '$id_page' " . $queryLimit;
+        $result = mysqli_query($link, $query,MYSQLI_USE_RESULT);    
+        if ($result) {        
+            while($row = $result->fetch_assoc()) {  
+                $dataResult[] = $row;            
+            }
         }
     }
     mysqli_close($link);
+    // paginador end
 
     $array = formatData($dataResult);    
     $point = formarDataXY($array);
-
-    //echo "<pre>"; print_r($point);
 ?>
 <!-- html -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Mouse Move Heatmap Example</title>
+  <title>Heatmap in browser</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow" />
-  <meta name="description" content="This example also demonstrates how to dynamically add data to a heatmap instance with the 'addData' function at runtime" />
-  <meta name="keywords" content="click heatmap, click heat, click map, mouse click map" />
+  <meta name="description" content="Heatmap in browser" />
+  <meta name="keywords" content="Heatmap in browser" />
   <style>
 body, html, h2 { margin:0; padding:0; height:100%;}
-.demo-wrapper { width:100%; height:100%; position:absolute; background:rgba(0,0,0,.1); background-image:"image/resolution/11366x768.png"}
+.demo-wrapper { width:100%; height:100%; position:absolute; background:rgba(0,0,0,.1);}
 .heatmap {width: 100%;height: 100%;}
   </style>
 </head>
@@ -101,42 +107,36 @@ body, html, h2 { margin:0; padding:0; height:100%;}
   <script src="js/heatmap.min.js"></script>  
   <script>    
     window.onload = function() {
-        document.body.style.backgroundImage="url('image/resolution/<?php echo $screen ?>.png')";        
-        //var heatmapContainer = document.getElementById('heatmap')
-
+        document.body.style.backgroundImage="url('image/resolution/<?php echo $screen ?>.png')";
         // data
         <?php $string = '';
         foreach ($point as $key => $arreglo) {
-            foreach($arreglo as $indice => $value) { // print_r($arreglo);
+            foreach($arreglo as $indice => $value) {
                 $string .= "{x:".$arreglo['x'].", y:".$arreglo['y'].", value:50},"; continue;             
             }
         }        
         if($string != '') {
-            $string = substr($string, 0, -1);            
+            $string = substr($string, 0, -1);
         }
         ?>
 
         //var points = [{x:582, y:500,value: 50}, {x:10, y:10,value: 50}];
         var points = [<?php echo $string ?>];
-        var data = { max: 96, data: points };
-        console.log('data', data);
+        var data = { max: 96, data: points };        
 
         //render
         var heatmapInstance = h337.create({
             container: document.querySelector('.heatmap')
         });
-
-        //var data = generateRandomData(200);
+        
         heatmapInstance.setData(data);
-
-
-
     };
   </script>
 </body>
 </html>
 <!-- html -->
 <?php else : ?>
+    <h2>Available resolutions 'HeadMap'</h2>
     <ul>
     <?php for ($i = 0; $i < count($sc); $i++) : ?> 
         <li><a href="?id_page=1&sc=<?php echo $sc[$i]['screem'] ?>"><?php echo $sc[$i]['screem'] ?></a></li>
