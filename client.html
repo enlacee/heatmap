@@ -1,0 +1,81 @@
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Mouse Move Heatmap Example</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow" />
+<meta name="description" content="This example also demonstrates how to dynamically add data to a heatmap instance with the 'addData' function at runtime" />
+<meta name="keywords" content="click heatmap, click heat, click map, mouse click map" />
+
+<style>
+    body, html, h2 { margin:0; padding:0; height:100%;}
+    .demo-wrapper { width:100%; height:100%; position:absolute; background:rgba(0,0,0,.1);}
+    #heatmap {width: 100%;height: 100%;}
+</style>
+</head>
+<body onmousemove="getPos(event)">
+    <div class="wrapper">
+        <div class="demo-wrapper">
+            <div id="heatmap">
+            </div>
+        </div>
+        <span id="displayArea"></span>
+    </div>
+
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/heatmapFunction.js"></script>
+
+    <script>
+    // background
+    document.body.style.backgroundImage="url('image/resolution/1366x768.png')";
+    var dataXY = new Array();
+    var idBrowser = cuniq();
+
+    //get x,y
+    function getPos(e) {
+        var x = e.clientX;
+        var y = e.clientY;
+        var arrayScreem = getViewport();
+        var arreglo = {
+            'id' : idBrowser,
+            'x' : x,
+            'y' : y,
+            'viewPort' : arrayScreem[0] + 'x' + arrayScreem[1],
+            'windowBrowser' : window.outerWidth + 'x' + window.outerHeight,
+            'screen' : screen.width + 'x' + screen.height,
+            'date' : _settingDateTime(new Date())
+        };
+
+        dataXY.push(arreglo);
+    }
+
+     /**
+      * send data to server
+      */
+    function sendDataToServer() {
+         //console.log(dataXY.length);
+             setTimeout(function() {
+                 console.log("setTimeout");
+                 sendDataToServer();
+                 dataXY = new Array();
+
+             }, 2000);
+
+         $.ajax({
+             url: 'parametros.php',
+             data : {op : 'insertar', data : dataXY, idPage : 1},
+             type: 'POST',
+             dataType: 'json',
+             success: function (rs){
+             }
+         });
+    }
+
+
+    // Init App
+    //setInterval("sendDataToServer()",5000);
+    sendDataToServer();
+
+    </script>
+</body>
+</html>
