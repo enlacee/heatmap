@@ -46,7 +46,7 @@ function formarDataXY($data) {
 //conection:
 $database = 'heatmap';
 $user = 'root';
-$pass = 'beeznest';
+$pass = '123456';
 
 ?>
 <?php  if (!empty($_GET['sc'])) : ?>
