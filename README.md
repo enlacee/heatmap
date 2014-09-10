@@ -31,3 +31,11 @@ Revise **heatmap/client.html** (este es la pagina de prueba)
     <body onmousemove="getPos(event)">contenidohtml</body>
 
 #### Paso 4
+Ahora puedemos ver los reportes, para esta version solo hay habilitados:
+// resoluciones de monitores aceptados (configurable para otras resoluciones)
+- 1366x768
+- 1280x800
+- 1024x768
+- 1600x900
+
+Para ver el reporte ingrese : http://localhost/heatmap/reporte.php 
