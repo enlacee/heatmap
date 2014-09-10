@@ -26,7 +26,7 @@ Configuracion los parámetros de base de datos que se encuentran en el archivo :
 #### Paso 3
 Configurar la pagina (donde se se activara el plugin mapa de calor)
 en la estructura html justo en el tag **body** poner esta linea  (funcion javascript), este se encargara  de capturar el movimiento del mouse y guardarlo en la base de datos.
-revise **heatmap/client.html** (este es la pagina demo  uselo como guia si es necesario)
+revise **http://localhost/heatmap/client.html** (este es la pagina demo  uselo como guia si es necesario)
 
     <body onmousemove="getPos(event)">contenidohtml</body>
 
