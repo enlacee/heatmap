@@ -23,55 +23,9 @@
 
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/heatmapFunction.js"></script>
-
     <script>
-    // background
-    document.body.style.backgroundImage="url('image/resolution/1600x900.png')";
-    var dataXY = new Array();
-    var idBrowser = cuniq();
-
-    //get x,y
-    function getPos(e) {
-        var x = e.clientX;
-        var y = e.clientY;
-        var arrayScreem = getViewport();
-        var arreglo = {
-            'id' : idBrowser,
-            'x' : x,
-            'y' : y,
-            'viewPort' : arrayScreem[0] + 'x' + arrayScreem[1],
-            'windowBrowser' : window.outerWidth + 'x' + window.outerHeight,
-            'screen' : screen.width + 'x' + screen.height,
-            'date' : _settingDateTime(new Date())
-        };
-
-        dataXY.push(arreglo);
-    }
-
-     /**
-      * send data to server
-      */
-    function sendDataToServer() {
-         //console.log(dataXY.length);
-             setTimeout(function() {
-                 //console.log("setTimeout");
-                 sendDataToServer();
-                 dataXY = new Array();
-
-             }, 2000);
-
-         $.ajax({
-             url: 'parametros.php',
-             data : {op : 'insertar', data : dataXY, idPage : 1},
-             type: 'POST',
-             dataType: 'json',
-             success: function (rs){
-             }
-         });
-    }
-
-    // Init App
-    sendDataToServer();
+        // background
+        document.body.style.backgroundImage="url('image/resolution/1600x900.png')";
     </script>
 </body>
 </html>

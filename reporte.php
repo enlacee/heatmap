@@ -1,4 +1,6 @@
 <?php
+require_once 'config.php';
+
 // data base screem
 $sc[0]['screem'] = '1366x768';
 $sc[1]['screem'] = '1280x800';
@@ -41,19 +43,12 @@ function formarDataXY($data) {
     return $newData;
 }
 
-
-
-//conection:
-$database = 'heatmap';
-$user = 'root';
-$pass = '123456';
-
 ?>
 <?php  if (!empty($_GET['sc'])) : ?>
 <?php 
-/*echo "<pre>";
-print_r($_GET);*/
-    $link = mysqli_connect("localhost", $user, $pass, $database) or die("Error " . mysqli_error($link));
+    //conection:
+    $link = mysqli_connect($servidor, $user, $pass, $database) or die("Error " . mysqli_error($link));
+
     // insert
     $screen = $_GET['sc'];
     $id_page = $_GET['id_page'];
