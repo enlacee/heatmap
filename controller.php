@@ -15,13 +15,19 @@ function saveAction($request)
     $flag = 'false';
     $param = $request;
     $dataPost = isset($param['data']) ? $param['data'] : false;
-    $idPage = (int) empty($param['idPage']) ? 0 : $param['idPage'];
+    $idPage = intval($param['idPage']);
 
     if (is_array($dataPost) && count($dataPost) > 0) {
         $reg = formarDataToSerial($idPage, $dataPost);
 
         //conection:
         $link = mysqli_connect($servidor, $user, $pass, $database) or die("Error " . mysqli_error($link));
+
+        $reg['page_id'] = intval($reg['page_id']);
+        $reg['browser_id'] = $reg['browser_id'];
+        $reg['view_port'] = mysqli_real_escape_string($link, $reg['view_port']);
+        $reg['window_browser'] = mysqli_real_escape_string($link, $reg['window_browser']);
+        $reg['screen'] = mysqli_real_escape_string($link, $reg['screen']);        
 
         $query = "INSERT INTO heatmap (page_id, browser_id, view_port, window_browser, screen, data_serial, created_at) "
             . "VALUES ('".$reg['page_id']."', '".$reg['browser_id']."','".$reg['view_port']."','".$reg['window_browser']."','".$reg['screen']."', '".$reg['data_serial']."', '".date('Y-m-d H:i:s')."')";
@@ -63,7 +69,7 @@ function formarDataToSerial($idPage, $data) {
             'view_port' => $data[$i]['viewPort'],
             'window_browser' => $data[$i]['windowBrowser'],
             'screen' => $data[$i]['screen'],
-            'created_at' => $data[$i]['created_at'],
+            'created_at' => $data[$i]['date'],
         );
     }
     $array[$counter]['data_serial'] = serialize($dataSerial);

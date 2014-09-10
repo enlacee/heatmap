@@ -16,3 +16,14 @@ CREATE TABLE `heatmap` (
   updated_at datetime DEFAULT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `page`;
+CREATE TABLE `page` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `url` tinytext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `page` (`id`, `url`) VALUES
+(1, 'http://vlearning.icpna.edu.pe/in/web/login');
