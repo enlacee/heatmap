@@ -4,11 +4,7 @@ Descripcion:
 -------------
 Gestionar mapa de calor en determinadas paginas
 pruebas con el plugin http://www.patrick-wied.at/static/heatmapjs
-
 - script para obtener data (movimiento del mouse)
-- pagina web donde se ve el reporte (mapa de calor) 
-
-
 
 #### INSTALACION
 > - Siga los pasos
