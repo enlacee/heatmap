@@ -1,15 +1,16 @@
 <?php
 
 if (!empty($_POST)) {
-	saveAction($_POST);
+    saveAction($_POST);
 }
 
 /**
-* save data
-*/
+ * Save data
+ * @param   array   Request data (unfiltered)
+ */
 function saveAction($request)
 {
-	require_once 'config.php';	
+    require_once 'config.php';
 
     $flag = 'false';
     $param = $request;
@@ -22,8 +23,8 @@ function saveAction($request)
         //conection:
         $link = mysqli_connect($servidor, $user, $pass, $database) or die("Error " . mysqli_error($link));
 
-        $query = "INSERT INTO heatmap (id_page, id_browser, view_port, window_browser, screen, data_serial, create_at) "
-            . "VALUES ('".$reg['id_page']."', '".$reg['id_browser']."','".$reg['view_port']."','".$reg['window_browser']."','".$reg['screen']."', '".$reg['data_serial']."', '".date('Y-m-d H:i:s')."')";
+        $query = "INSERT INTO heatmap (page_id, browser_id, view_port, window_browser, screen, data_serial, created_at) "
+            . "VALUES ('".$reg['page_id']."', '".$reg['browser_id']."','".$reg['view_port']."','".$reg['window_browser']."','".$reg['screen']."', '".$reg['data_serial']."', '".date('Y-m-d H:i:s')."')";
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
@@ -48,8 +49,8 @@ function formarDataToSerial($idPage, $data) {
 
     for ($i = 0; $i < count($data); $i++) {
         if ($i == 0) {
-            $array[$counter]['id_page'] = $idPage;
-            $array[$counter]['id_browser'] = $data[$i]['id'];
+            $array[$counter]['page_id'] = $idPage;
+            $array[$counter]['browser_id'] = $data[$i]['id'];
             $array[$counter]['view_port'] = $data[$i]['viewPort'];
             $array[$counter]['window_browser'] = $data[$i]['windowBrowser'];
             $array[$counter]['screen'] = $data[$i]['screen'];
@@ -57,12 +58,12 @@ function formarDataToSerial($idPage, $data) {
         $dataSerial[$i] = array(
             'x' => $data[$i]['x'],
             'y' => $data[$i]['y'],
-            'id_page' => $idPage,
-            'id_browser' => $data[$i]['id'],
+            'page_id' => $idPage,
+            'browser_id' => $data[$i]['id'],
             'view_port' => $data[$i]['viewPort'],
             'window_browser' => $data[$i]['windowBrowser'],
             'screen' => $data[$i]['screen'],
-            'date' => $data[$i]['date'],
+            'created_at' => $data[$i]['created_at'],
         );
     }
     $array[$counter]['data_serial'] = serialize($dataSerial);

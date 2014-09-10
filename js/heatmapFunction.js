@@ -87,14 +87,13 @@ function getPos(e) {
 }
 
  /**
-  * send data to server
+  * Send data to server
   */
 function sendDataToServer() {
-         setTimeout(function() {
-             sendDataToServer();
-             dataXY = new Array();
-
-         }, 2000);
+     setTimeout(function() {
+         sendDataToServer();
+         dataXY = new Array();
+     }, 2000);
 
      $.ajax({
          url: 'controller.php',
@@ -105,7 +104,6 @@ function sendDataToServer() {
          }
      });
 }
-
 
 // Init App
 sendDataToServer();
