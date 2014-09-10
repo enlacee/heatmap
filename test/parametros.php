@@ -16,8 +16,8 @@ if (is_array($dataPost) && count($dataPost) > 0) {
     $pass = '123456';
     $link = mysqli_connect("localhost", $user, $pass, $database) or die("Error " . mysqli_error($link));
     // insert
-    $query = "INSERT INTO heatmap (id_page, id_browser, view_port, window_browser, screen, data_serial, create_at) "
-        . "VALUES ('".$reg['id_page']."', '".$reg['id_browser']."','".$reg['view_port']."','".$reg['window_browser']."','".$reg['screen']."', '".$reg['data_serial']."', '".$reg['create_at']."')";
+    $query = "INSERT INTO heatmap (page_id, browser_id, view_port, window_browser, screen, data_serial, created_at) "
+        . "VALUES ('".$reg['page_id']."', '".$reg['browser_id']."','".$reg['view_port']."','".$reg['window_browser']."','".$reg['screen']."', '".$reg['data_serial']."', '".$reg['created_at']."')";
     $stmt = mysqli_prepare($link, $query);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt); // CLOSE $stmt
@@ -40,18 +40,18 @@ function formarDataToSerial($idPage, $data) {
 
     for ($i = 0; $i < count($data); $i++) {
         if ($i == 0) {
-            $array[$counter]['id_page'] = $idPage;
-            $array[$counter]['id_browser'] = $data[$i]['id'];
+            $array[$counter]['page_id'] = $idPage;
+            $array[$counter]['browser_id'] = $data[$i]['id'];
             $array[$counter]['view_port'] = $data[$i]['viewPort'];
             $array[$counter]['window_browser'] = $data[$i]['windowBrowser'];
             $array[$counter]['screen'] = $data[$i]['screen'];
-            $array[$counter]['create_at'] = date('Y-m-d H:i:s');
+            $array[$counter]['created_at'] = date('Y-m-d H:i:s');
         }
         $dataSerial[$i] = array(
             'x' => $data[$i]['x'],
             'y' => $data[$i]['y'],
-            'id_page' => $idPage,
-            'id_browser' => $data[$i]['id'],
+            'page_id' => $idPage,
+            'browser_id' => $data[$i]['id'],
             'view_port' => $data[$i]['viewPort'],
             'window_browser' => $data[$i]['windowBrowser'],
             'screen' => $data[$i]['screen'],
