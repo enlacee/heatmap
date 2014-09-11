@@ -26,4 +26,6 @@ CREATE TABLE `page` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `page` (`id`, `url`) VALUES
-(1, 'http://vlearning.icpna.edu.pe/in/web/login');
+(1, 'http://localhost/heatmap/client.html'),
+(2, 'http://vlearning.icpna.edu.pe/in/web/login'),
+(3, 'https://github.com/');
