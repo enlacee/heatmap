@@ -67,6 +67,7 @@ function cuniq() {
 // ================================================================================
 var dataXY = new Array();
 var idBrowser = cuniq();
+var idUrl = window.location.href;
 
 //get x,y
 function getPos(e) {
@@ -97,7 +98,7 @@ function sendDataToServer() {
 
      $.ajax({
          url: 'controller.php',
-         data : {data : dataXY, idPage : 1},
+         data : {data : dataXY, idUrl : idUrl},
          type: 'POST',
          dataType: 'json',
          success: function (rs){

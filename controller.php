@@ -15,13 +15,14 @@ function saveAction($request)
     $flag = 'false';
     $param = $request;
     $dataPost = isset($param['data']) ? $param['data'] : false;
-    $idPage = intval($param['idPage']);
+    $idUrl = $param['idUrl'];
+    
+    //conection:
+    $link = mysqli_connect($servidor, $user, $pass, $database) or die("Error " . mysqli_error($link));
+    $idPage = _checkIdUrl($link, $idUrl);
 
-    if (is_array($dataPost) && count($dataPost) > 0) {
+    if ($idPage > 0 && is_array($dataPost) && count($dataPost) > 0) {
         $reg = formarDataToSerial($idPage, $dataPost);
-
-        //conection:
-        $link = mysqli_connect($servidor, $user, $pass, $database) or die("Error " . mysqli_error($link));
 
         $reg['page_id'] = intval($reg['page_id']);
         $reg['browser_id'] = $reg['browser_id'];
@@ -33,10 +34,10 @@ function saveAction($request)
             . "VALUES ('".$reg['page_id']."', '".$reg['browser_id']."','".$reg['view_port']."','".$reg['window_browser']."','".$reg['screen']."', '".$reg['data_serial']."', '".date('Y-m-d H:i:s')."')";
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt);
-        mysqli_close($link);
+        mysqli_stmt_close($stmt);        
         $flag = 'true';
     }
+    mysqli_close($link);
 
     echo $flag;
 }
@@ -75,4 +76,19 @@ function formarDataToSerial($idPage, $data) {
     $array[$counter]['data_serial'] = serialize($dataSerial);
 
     return $array[0];
+}
+
+
+/**
+* helper of main function
+* search idPage of sites avaibles for apply graphic heatmap.
+*/
+function _checkIdUrl($linkConection, $url) {
+
+    $flag = false;
+    $url = mysqli_real_escape_string($linkConection, $url);
+    $query = "SELECT  id FROM page WHERE url = '$url' LIMIT 1";
+    $count = mysqli_fetch_row(mysqli_query($linkConection, $query));
+
+    return (intval($count[0]) > 0)  ? $count[0] : false;
 }
