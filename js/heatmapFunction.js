@@ -69,7 +69,9 @@ var dataXY = new Array();
 var idBrowser = cuniq();
 var idUrl = window.location.href;
 
-//get x,y
+/**
+* get data x and y
+*/
 function getPos(e) {
     var x = e.clientX;
     var y = e.clientY;
@@ -88,7 +90,7 @@ function getPos(e) {
 }
 
  /**
-  * Send data to server
+  * Send data to server each 2 seg. 
   */
 function sendDataToServer() {
      setTimeout(function() {
@@ -106,5 +108,15 @@ function sendDataToServer() {
      });
 }
 
-// Init App
-sendDataToServer();
+
+/**
+* ready dom
+*/
+$(document ).ready(function(event) {
+  $("body").mousemove(function(event){
+    getPos(event);
+  });
+
+  // Init App
+  sendDataToServer();
+});
