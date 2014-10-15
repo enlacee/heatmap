@@ -12,13 +12,14 @@ function saveAction($request)
 {
     require_once 'config.php';
 
+    //connection:
+    $link = mysqli_connect($servidor, $user, $pass, $database) or die("Error " . mysqli_error($link));
+
     $flag = 'false';
     $param = $request;
-    $dataPost = isset($param['data']) ? $param['data'] : false;
-    $idUrl = $param['idUrl'];
+    $idUrl = mysqli_real_escape_string($link, $param['idUrl']);
     
-    //conection:
-    $link = mysqli_connect($servidor, $user, $pass, $database) or die("Error " . mysqli_error($link));
+    $dataPost = isset($param['data']) ? $param['data'] : false;
     $idPage = _checkIdUrl($link, $idUrl);
 
     if ($idPage > 0 && is_array($dataPost) && count($dataPost) > 0) {
@@ -83,12 +84,23 @@ function formarDataToSerial($idPage, $data) {
 * helper of main function
 * search idPage of sites avaibles for apply graphic heatmap.
 */
-function _checkIdUrl($linkConection, $url) {
+function _checkIdUrl($linkConnection, $url) {
 
     $flag = false;
-    $url = mysqli_real_escape_string($linkConection, $url);
+    $url = mysqli_real_escape_string($linkConnection, $url);
+    $matches = array();
+    if (preg_match('/\/COURSE(\d*)\//', $url, $matches)) {
+        $course = $matches[1];
+        if (strpos($url,'kids')) {
+            $url = str_replace('COURSE'.$course, 'COURSE002', $url);
+            $url = str_replace('index.php','',$url);
+        } else {
+            $url = str_replace('COURSE'.$course, 'COURSE4', $url);
+            $url = str_replace('index.php','',$url);
+        }
+    }
     $query = "SELECT  id FROM page WHERE url = '$url' LIMIT 1";
-    $count = mysqli_fetch_row(mysqli_query($linkConection, $query));
+    $count = mysqli_fetch_row(mysqli_query($linkConnection, $query));
 
     return (intval($count[0]) > 0)  ? $count[0] : false;
 }
